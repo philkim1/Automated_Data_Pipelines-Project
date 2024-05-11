@@ -26,11 +26,11 @@ customercurated_node1715363441069 = glueContext.create_dynamic_frame.from_option
 
 # Script generated for node SQL Query
 SqlQuery0 = '''
-select *
-from source
-join source2 on Source.serialnumber = source2.serialnumber;
+select s.sensorreadingtime, s.serialnumber, s.distancefromobject, s2.customername, s2.email, s2.phone, s2.birthday, s2.registrationdate, s2.lastupdatedate, s2.sharewithpublicasofdate, s2.sharewithresearchasofdate, s2.sharewithfriendsasofdate
+from s
+join s2 on s.serialnumber = s2.serialnumber;
 '''
-SQLQuery_node1715363921013 = sparkSqlQuery(glueContext, query = SqlQuery0, mapping = {"source":steptrainerlanding_node1715363827319, "source2":customercurated_node1715363441069}, transformation_ctx = "SQLQuery_node1715363921013")
+SQLQuery_node1715363921013 = sparkSqlQuery(glueContext, query = SqlQuery0, mapping = {"s":steptrainerlanding_node1715363827319, "s2":customercurated_node1715363441069}, transformation_ctx = "SQLQuery_node1715363921013")
 
 # Script generated for node step trainer trusted
 steptrainertrusted_node1715364059876 = glueContext.getSink(path="s3://philbucket/step trainer/trusted/", connection_type="s3", updateBehavior="UPDATE_IN_DATABASE", partitionKeys=[], enableUpdateCatalog=True, transformation_ctx="steptrainertrusted_node1715364059876")
